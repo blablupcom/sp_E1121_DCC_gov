@@ -99,7 +99,8 @@ soup = BeautifulSoup(html, 'lxml')
 blocks = soup.find_all('tr',{'class':'js-navigation-item'})
 for block in blocks:
     link = block.find('td', 'content').find('a', href=True)
-    url = 'https://github.com' + link['href']
+    url = 'https://raw.githubusercontent.com' + link['href'].replace('/spending/blob/', '/spending/')
+    print url
     if '.csv' in url or '.xls' in url:
         title = link.contents[0]
         raw_text = title.split('_')[-1].split('.')[0]
@@ -129,4 +130,3 @@ if errors > 0:
 
 
 #### EOF
-
